@@ -1,7 +1,15 @@
 import React from 'react';
 import "./CartItem.css";
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteCart } from '../store/cart/cartSlice';
 
 const CartItem = ({item}) => {
+    const dispatch = useDispatch();
+    const cart = useSelector(state=>state.cart)
+    const restItem = cart.filter((ele,index)=>{
+        if(ele.id === item.id) return index;
+    })
+
     return (
         <div className="cart-item">
         <img 
@@ -11,7 +19,7 @@ const CartItem = ({item}) => {
         />
         <span className="cart-item-name">{item.product_name}</span>
         <span className="cart-item-price">{item.price}</span>
-        <i className="fas fa-trash-alt"></i>
+        <i className="fas fa-trash-alt" onClick={()=>dispatch(deleteCart(restItem))}></i>
     </div>
     );
 };
