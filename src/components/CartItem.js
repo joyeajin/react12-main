@@ -6,10 +6,9 @@ import { deleteCart } from '../store/cart/cartSlice';
 const CartItem = ({item}) => {
     const dispatch = useDispatch();
     const cart = useSelector(state=>state.cart)
-    const restItem = cart.filter((ele,index)=>{
-        if(ele.id === item.id) return index;
-    })
 
+    const restItem = cart.filter((ele,index)=> ele.id === item.id)
+    
     return (
         <div className="cart-item">
         <img 
